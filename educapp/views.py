@@ -2,10 +2,10 @@ from django.shortcuts import render
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
 
-from educserver.serializers import CustomUserSerializer, ClassroomSerializer, StudentScoreSerializer, CourseContentSerializer, QuizSerializer, QuestionSerializer, ScoreSerializer, ClassStudentSerializer, JoinClassStudentSerializer
+from educserver.serializers import CustomUserSerializer, ClassroomSerializer, StudentScoreSerializer, CourseContentSerializer, QuizSerializer, QuestionSerializer, ScoreSerializer, ClassStudentSerializer, JoinClassStudentSerializer, DevTeamSerializer, ShowDevTeamSerializer
 from rest_framework import status
 from rest_framework.authtoken.models import Token
-from educapp.models import CustomUser, Classroom, ClassStudent, CourseContent, Quiz, Question, Score
+from educapp.models import CustomUser, Classroom, ClassStudent, CourseContent, Quiz, Question, Score, DevTeam
 
 from django.shortcuts import get_object_or_404
 
@@ -106,6 +106,16 @@ def post_score(request):
         return Response({"score": score.score})
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+@api_view(['POST'])
+@csrf_exempt
+@permission_classes([AllowAny])
+def post_devMember(request):
+    serializer = DevTeamSerializer(data=request.data)
+    if serializer.is_valid():
+        devMember = serializer.save()
+        return Response(serializer.data)
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
 #DIRI TANAN GET REQUESTS
 @api_view(['GET'])
 @csrf_exempt
@@ -181,6 +191,16 @@ def get_questions(request, quiz_id):
         questions = Question.objects.filter(quizID=quiz_id)
         serializer = QuestionSerializer(questions, many=True)
         return Response({"questions": serializer.data})
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+@api_view(['GET'])
+@csrf_exempt
+@permission_classes([AllowAny])
+def get_devTeam(request):
+    if request.method == 'GET':
+        devTeam = DevTeam.objects.all()
+        serializer = ShowDevTeamSerializer(devTeam, many=True)
+        return Response(serializer.data)
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 @api_view(['GET'])

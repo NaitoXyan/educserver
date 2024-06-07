@@ -1,11 +1,21 @@
 from rest_framework import serializers
-from educapp.models import CustomUser, Classroom, ClassStudent, CourseContent, Quiz, Question, Score
+from educapp.models import CustomUser, Classroom, ClassStudent, CourseContent, Quiz, Question, Score, DevTeam
 # from django.contrib.auth.models import User
 
 # class UserSerializer(serializers.ModelSerializer):
 #     class Meta(object):
 #         model = User
 #         fields = ['userID', 'email', 'username', 'password']
+
+class DevTeamSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = DevTeam
+        fields = ['personID', 'firstName', 'lastName', 'address']
+
+class ShowDevTeamSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = DevTeam
+        fields = ['firstName', 'lastName', 'address']
 
 class CustomUserSerializer(serializers.ModelSerializer):
     class Meta(object):

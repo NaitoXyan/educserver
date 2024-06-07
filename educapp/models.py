@@ -3,6 +3,12 @@ from django.contrib.auth.models import AbstractUser
 
 # Create your models here.
 
+class DevTeam(models.Model):
+    personID = models.AutoField(primary_key=True)
+    firstName = models.CharField(max_length=150)
+    lastName = models.CharField(max_length=150)
+    address = models.CharField(max_length=200, default='Damilag, Manolo Fortich, Bukidnon')
+
 class CustomUser(AbstractUser):
     isTeacher = models.BooleanField(default=False)
     

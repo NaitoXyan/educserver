@@ -13,6 +13,7 @@ urlpatterns = [
     re_path('create_questions', views.create_questions), #URL for questions post reqs
     re_path('join_class', views.join_class),
     re_path('post_score', views.post_score),
+    re_path('post_devMember', views.post_devMember),
 
     #GET urls
     re_path(r'^classrooms/(?P<teacher_id>\d+)/$', views.classroom_list),
@@ -22,4 +23,5 @@ urlpatterns = [
     re_path(r'^get_questions/(?P<quiz_id>\d+)/$', views.get_questions),
     re_path(r'^get_score/(?P<quiz_id>\d+)/$', views.get_score),
     re_path(r'^student_scores/(?P<quiz_id>\d+)/$', views.student_scores),
+    re_path('get_devTeam', views.get_devTeam),
 ]

@@ -33,6 +33,13 @@ Content-Type: application/json
 
 ###
 
+POST http://127.0.0.1:8000/post_devMember
+Content-Type: application/json
+
+{"firstName": "Diovem", "lastName": "Paderan", "address": "Lux Hotel, Cagayan de Oro City"}
+
+###
+
 GET http://127.0.0.1:8000/classrooms/1
 Content-Type: application/json
 
@@ -64,6 +71,11 @@ Content-Type: application/json
 ###
 
 GET http://127.0.0.1:8000/student_scores/6
+Content-Type: application/json
+
+###
+
+GET http://127.0.0.1:8000/get_devTeam
 Content-Type: application/json
 
 ###
